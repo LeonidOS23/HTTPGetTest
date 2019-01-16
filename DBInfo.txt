@@ -1,0 +1,14 @@
+Connection should use the following data:
+URL: 	jdbc:mysql://localhost:3306/world",
+USER: 	root
+PASS: 	MyTest
+
+SQL script for table creation:
+CREATE TABLE TEST
+(
+	ID INT NOT NULL,
+	URL NVARCHAR(255) NOT NULL,
+	CHECKDATE DATE NULL,
+	STATUS INT NULL,
+	CONSTRAINT TEST_PK PRIMARY KEY (ID)
+);
