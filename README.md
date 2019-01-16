@@ -12,4 +12,4 @@ mvn clean compile assembly:single
 Project launch for project launch use command:
 java -jar HTTPGetTest-1.0-SNAPSHOT-jar-with-dependencies.jar
 
-Program will wait for date input, please use proposed dormat "yyyy.mm.dd".
+Program will propose to use date format "yyyy.mm.dd" for input. It'll start main part of program right after your input.
