@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 
 public class ThreadPool {
 
-    public static void main(String[] args) throws ParseException, SQLException, ClassNotFoundException, IOException {
+    public static void main(String[] argv) throws ParseException, SQLException, ClassNotFoundException, IOException {
         System.out.println("Please input date in format \"yyyy.mm.dd\".");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String date = br.readLine();
