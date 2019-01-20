@@ -1,14 +1,14 @@
 import java.sql.*;
-import java.text.ParseException;
 import java.util.*;
 
 public class DBTasks {
-    public static List<Rec> collectLinks(String givenDate) throws ClassNotFoundException, SQLException, ParseException {
+    public static List<Rec> collectLinks(String givenDate) throws ClassNotFoundException, SQLException{
         Locale.setDefault(Locale.ENGLISH);
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/world",
                 "root", "MyTest");
-        String query = "SELECT URL FROM TEST WHERE CHECKDATE < CONVERT(?, DATE) OR CHECKDATE IS NULL";
+        String query = "SELECT URL FROM TEST WHERE CHECKDATE IS NULL OR CHECKDATE < ?";
+        //WHERE ID < 100
         PreparedStatement prprdSttmnt = conn.prepareStatement(query);
         prprdSttmnt.setString(1, givenDate);
         List<Rec> rowValues = new ArrayList<>();
@@ -39,11 +39,9 @@ public class DBTasks {
             prprdSttmnt.setString(2, urls);
             prprdSttmnt.addBatch();
             if (++count % limit == 0) {
-                //System.out.println("Importing batch.");
                 prprdSttmnt.executeBatch();
             }
         }
-        //System.out.println("Importing leftovers.");
         prprdSttmnt.executeBatch();
         prprdSttmnt.close();
         conn.close();

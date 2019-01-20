@@ -18,14 +18,13 @@ public class WorkThread implements Runnable {
         try {
             URL url = new URL("http://" + this.rec.getURL());
             conn = (HttpURLConnection) url.openConnection();
-            System.out.println("Processing record = " + this.index);
             rec.setStatus(conn.getResponseCode());
-            System.out.println("Status of " + this.rec.getURL() + " is " + rec.getStatus());
-            conn.disconnect();
+            System.out.println("Status of " + this.rec.getURL() + ", number " + this.index + ", is " + this.rec.getStatus());
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            rec.setProcessed(true);
+            conn.disconnect();
+            this.rec.setProcessed();
         }
     }
 

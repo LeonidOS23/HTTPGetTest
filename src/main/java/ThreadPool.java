@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static java.lang.Thread.sleep;
+
 public class ThreadPool {
 
     public static void main(String[] argv) throws ParseException, SQLException, ClassNotFoundException, IOException {
@@ -19,12 +21,16 @@ public class ThreadPool {
         List<Rec> newRecords = new ArrayList<>();
         for (int i = 0; i < urls.size(); i++) {
             WorkThread wt = new WorkThread(urls.get(i), i);
-            newRecords.add(wt.returnRec());
             executorService.submit(wt);
+            newRecords.add(wt.returnRec());
         }
         boolean allProcessed = false;
         while (!allProcessed) {
-            System.out.println("");
+            try {
+                sleep(0);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             allProcessed = true;
             for (Rec record : newRecords) {
                 if (!record.isProcessed()) {
